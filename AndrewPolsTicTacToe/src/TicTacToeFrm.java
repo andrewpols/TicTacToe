@@ -18,6 +18,10 @@
 // import necessary utilities/packages
 import java.util.Arrays;
 import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 
 public class TicTacToeFrm extends javax.swing.JFrame {
     
@@ -78,8 +82,18 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         playerOneWinsLabel = new javax.swing.JLabel();
         playerTwoWinsLabel = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        player1Name = new javax.swing.JTextField();
+        player2Name = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        timerLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 800));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         TitleLabel.setFont(new java.awt.Font("Silom", 0, 36)); // NOI18N
@@ -117,18 +131,20 @@ public class TicTacToeFrm extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = -35;
         getContentPane().add(jPanel11, gridBagConstraints);
+        jPanel11.setVisible(false);
 
         playerTurnLabel.setFont(new java.awt.Font("Skia", 0, 15)); // NOI18N
         playerTurnLabel.setForeground(Color.RED);
         playerTurnLabel.setText("Player Turn: X ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipady = 15;
         getContentPane().add(playerTurnLabel, gridBagConstraints);
+        playerTurnLabel.setVisible(false);
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 3));
 
@@ -402,15 +418,16 @@ public class TicTacToeFrm extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.insets = new java.awt.Insets(0, 60, 20, 60);
         getContentPane().add(jPanel1, gridBagConstraints);
+        jPanel1.setVisible(false);
 
         GameEndLabel.setFont(new java.awt.Font("Copperplate", 0, 24)); // NOI18N
         GameEndLabel.setText("GameEndLabel");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 5, 0);
         getContentPane().add(GameEndLabel, gridBagConstraints);
         GameEndLabel.setVisible(false);
@@ -425,7 +442,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.ipadx = 25;
         gridBagConstraints.ipady = 15;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 45, 0);
@@ -436,10 +453,11 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         winCounterLabel.setText("Win Counter:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipady = 20;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         getContentPane().add(winCounterLabel, gridBagConstraints);
+        winCounterLabel.setVisible(false);
 
         jPanel17.setLayout(new java.awt.GridBagLayout());
 
@@ -459,9 +477,91 @@ public class TicTacToeFrm extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 15, 0);
         getContentPane().add(jPanel17, gridBagConstraints);
+        jPanel17.setVisible(false);
+
+        jPanel12.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Posterama1919W01-Bold", 0, 24)); // NOI18N
+        jLabel1.setText("Welcome to TicTacToe!");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        jPanel12.add(jLabel1, gridBagConstraints);
+
+        jPanel14.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("PT Serif Caption", 0, 13)); // NOI18N
+        jLabel2.setText("Player 1 Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        jPanel14.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("PT Serif Caption", 0, 13)); // NOI18N
+        jLabel3.setText("Player 2 Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        jPanel14.add(jLabel3, gridBagConstraints);
+
+        player1Name.setText("Enter Player Name");
+        player1Name.setMinimumSize(new java.awt.Dimension(128, 60));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel14.add(player1Name, gridBagConstraints);
+
+        player2Name.setText("Enter Player Name");
+        player2Name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                player2NameActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        jPanel14.add(player2Name, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 30, 30, 30);
+        jPanel12.add(jPanel14, gridBagConstraints);
+
+        jButton1.setForeground(new java.awt.Color(51, 153, 0));
+        jButton1.setText("Play!");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 10;
+        jPanel12.add(jButton1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jPanel12, gridBagConstraints);
+
+        timerLabel.setFont(new java.awt.Font("PT Mono", 0, 16)); // NOI18N
+        timerLabel.setText("Timer: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipady = 10;
+        getContentPane().add(timerLabel, gridBagConstraints);
+        timerLabel.setVisible(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -529,6 +629,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         }
         
         TopRightLabel.setVisible(true);
+       
     }//GEN-LAST:event_TopRightPickActionPerformed
 
     private void MiddleLeftPickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiddleLeftPickActionPerformed
@@ -682,8 +783,14 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         // enable "pick" buttons and reset player turn label to starting settings
         enableButtons();
         
+        // player turn label logic
+        if (player1) {
         playerTurnLabel.setText("PlayerTurn: X");
         playerTurnLabel.setForeground(Color.RED);
+      } else {
+        playerTurnLabel.setText("PlayerTurn: O");
+        playerTurnLabel.setForeground(Color.BLUE);
+      }
         playerTurnLabel.setVisible(true);
         
         
@@ -694,7 +801,80 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         disableText();
         
     }//GEN-LAST:event_playAgainBtnActionPerformed
-    // ^^^^^^^^^^^^^^^^^^^^^^
+
+    private void player2NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2NameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_player2NameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:     
+        player1Label.setText(player1Name.getText() + ": X");
+        player2Label.setText(player2Name.getText() + ": O");
+        
+        timerLabel.setVisible(true);
+            
+        jPanel12.setVisible(false);
+        
+        jPanel11.setVisible(true);
+        playerTurnLabel.setVisible(true);
+        jPanel1.setVisible(true);
+        winCounterLabel.setVisible(true);
+        jPanel17.setVisible(true);
+        
+        timerCountdown();
+        
+      
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+Timer timer = new Timer();
+
+
+TimerTask task = new TimerTask() {
+        
+
+        
+        @Override
+        public void run() {
+            if (counter>0) {
+                timerLabel.setText("Timer: " + counter);
+                counter--; 
+            } else {
+                timerLabel.setText("Turn Lost!");
+                player1 = !player1;
+                setPlayerLabel();
+                counter = 15;
+                // reset turn to next player here
+            }
+           
+        }
+    };
+
+public void timerCountdown() {   
+    
+    timer.scheduleAtFixedRate(task, 0, 1000);
+
+    
+}
+
+public void setPlayerLabel() {
+     // Update the playerTurn labels
+      if (player1) {
+        playerTurnLabel.setText("PlayerTurn: X");
+        playerTurnLabel.setForeground(Color.RED);
+      } else {
+        playerTurnLabel.setText("PlayerTurn: O");
+        playerTurnLabel.setForeground(Color.BLUE);
+      }
+}
+    
+    
+    
+    
+
+
+// ^^^^^^^^^^^^^^^^^^^^^^
     // JFRAME COMPONENTS CODE
     
     ////////////////////////////////////////////////////////////////////////////
@@ -706,6 +886,9 @@ public class TicTacToeFrm extends javax.swing.JFrame {
     int moveCount = 0;
     static boolean gameOver = false;
     static boolean tie = false; 
+    static boolean player1 = true;
+            int counter = 15;
+    
     
     int playerOneWins = 0;
     int playerTwoWins = 0;
@@ -719,8 +902,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
       {0, 0, 0},
       {0, 0, 0}
     };
-    
-    
+   
     
     // This is a 3D array that represents the COUNTER values of the game
     // The first outer array represents rows, the second array represents columns,
@@ -747,9 +929,9 @@ public class TicTacToeFrm extends javax.swing.JFrame {
 
     public int getPlayerNumber() {
         
-      // If the number of moves is even, it must be player 2's turn since player 1 initiates the first move
-      // We will assign Player One as [0] and Player Two as [1] for the purpose of indices
-      if (moveCount % 2 == 0) {
+      // Previously we used modulo to determine player number
+      // Now we just track if it is player1's turn or not
+      if (player1) {
         return 1;
       } else {
         return 0;
@@ -760,16 +942,18 @@ public class TicTacToeFrm extends javax.swing.JFrame {
     
     public void inputMove(int userRow, int userColumn) {
       moveCount++; // Update the move counter
+      player1 = !player1;
+      
+      counter = 15;
+         
       
       
-      // Since this number represents the previous move, we subtract 1 by it to attain the current move
-      // ( previousNum + current Num = 1 ---> currentNum = 1 - previousNum )
-      int playerNumber = 1 - getPlayerNumber(); 
+      int playerNumber = getPlayerNumber(); 
       
       System.out.println("Player Turn: " + (playerNumber + 1));
       
       // Update the playerTurn labels
-      if (playerNumber == 0) {
+      if (player1) {
         playerTurnLabel.setText("PlayerTurn: X");
         playerTurnLabel.setForeground(Color.RED);
       } else {
@@ -832,6 +1016,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
           gameBoard[1][userColumn][playerNumber] == 3) 
       {
         gameOver = true; // game over condition
+        return;
       } 
       
       // Recall diagonalPossible on checkMoveValidity
@@ -843,15 +1028,25 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         for (int i = 0; i < 2; i++) {
           if (gameBoard[2][i][playerNumber] == 3) {
             gameOver = true;
+            return;
           }
         }
       } 
 
       // Check tie
-      if (moveCount == 9 && !gameOver) {
-        tie = true; // If 9 moves have passed and no one has won, it must be a tie
-        gameOver = true;
+      // If a 0 exists in ticArray, the game cannot be over    
+      for (int i=0; i<3; i++) {
+          for (int j=0; j<3; j++) {
+              if (ticArray[i][j] == 0) {
+                  tie = false;
+                  return;
+              }
+              else {
+                  tie = true;
+              }
+          }
       }
+      
     }
 
     public void onClick(int userRow, int userColumn) {
@@ -879,15 +1074,22 @@ public class TicTacToeFrm extends javax.swing.JFrame {
          // playerNumber returns either 0 or 1 since we used getPlayerNumber() 
          // for indices. To get Player 1 or Player 2, just add 1 to getPlayerNumber()
          int playerNumber = getPlayerNumber() + 1;
+         String winnerName;
+         
+         if (playerNumber == 1) {
+             winnerName = player1Name.getText();
+         } else {
+            winnerName = player2Name.getText();
+         }
            
-         System.out.println("Winner! Player " + playerNumber);
-         GameEndLabel.setText("Winner! Player " + playerNumber);   
+         System.out.println("Winner! Player " + playerNumber + ", " + winnerName );
+         GameEndLabel.setText("Winner! Player " + playerNumber + ", " + winnerName );
          GameEndLabel.setVisible(true);
          // Show Play Again Button
          playAgainBtn.setVisible(true);
          playerTurnLabel.setVisible(false);
          
-         // Cbeck who won by getting playerNumber
+         // Check who won by getting playerNumber
          if (playerNumber == 1) {
              playerOneWins++;
              playerOneWinsLabel.setText("Player One: " + playerOneWins);
@@ -997,10 +1199,16 @@ public class TicTacToeFrm extends javax.swing.JFrame {
     private javax.swing.JButton TopMiddlePick;
     private javax.swing.JLabel TopRightLabel;
     private javax.swing.JButton TopRightPick;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1012,10 +1220,13 @@ public class TicTacToeFrm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JButton playAgainBtn;
     private javax.swing.JLabel player1Label;
+    private javax.swing.JTextField player1Name;
     private javax.swing.JLabel player2Label;
+    private javax.swing.JTextField player2Name;
     private javax.swing.JLabel playerOneWinsLabel;
     private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JLabel playerTwoWinsLabel;
+    private javax.swing.JLabel timerLabel;
     private javax.swing.JLabel winCounterLabel;
     // End of variables declaration//GEN-END:variables
 }
