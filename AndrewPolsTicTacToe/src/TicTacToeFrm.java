@@ -89,6 +89,8 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         player1Name = new javax.swing.JTextField();
         player2Name = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         timerLabel = new javax.swing.JLabel();
 
@@ -493,7 +495,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         jPanel14.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("PT Serif Caption", 0, 13)); // NOI18N
-        jLabel2.setText("Player 1 Name:");
+        jLabel2.setText("Player 1 Name (X):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -502,7 +504,7 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         jPanel14.add(jLabel2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("PT Serif Caption", 0, 13)); // NOI18N
-        jLabel3.setText("Player 2 Name:");
+        jLabel3.setText("Player 2 Name (O):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -527,6 +529,22 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         jPanel14.add(player2Name, gridBagConstraints);
+
+        jLabel4.setText("Random Player Start:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
+        jPanel14.add(jLabel4, gridBagConstraints);
+        jLabel4.setVisible(false);
+
+        jLabel5.setText("X");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
+        jPanel14.add(jLabel5, gridBagConstraints);
+        jLabel5.setVisible(false);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -797,6 +815,8 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         
         // Disable Play Again Button, Winner Label, and X/O's
         playAgainBtn.setVisible(false);
+        counter = 15;
+        timerLabel.setVisible(true);
         GameEndLabel.setVisible(false);
         disableText();
         
@@ -806,29 +826,36 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_player2NameActionPerformed
 
+    
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:     
         player1Label.setText(player1Name.getText() + ": X");
         player2Label.setText(player2Name.getText() + ": O");
+                
         
-        timerLabel.setVisible(true);
-            
-        jPanel12.setVisible(false);
-        
-        jPanel11.setVisible(true);
+       
         playerTurnLabel.setVisible(true);
-        jPanel1.setVisible(true);
-        winCounterLabel.setVisible(true);
-        jPanel17.setVisible(true);
+        jButton1.setVisible(false);
         
-        timerCountdown();
+        timer2.scheduleAtFixedRate(task2, 0, 300);
         
-      
+        
+        
+        if (counter2 == 0) {
+            
+        }
+             
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
     
 Timer timer = new Timer();
+
+Timer timer2 = new Timer();
+
+int counter2 = 10;
 
 
 TimerTask task = new TimerTask() {
@@ -851,6 +878,48 @@ TimerTask task = new TimerTask() {
         }
     };
 
+    TimerTask task2 = new TimerTask() {
+
+
+    
+            @Override
+            public void run() {     
+                if (counter2 > 0) {
+                  if (counter2 % 2 == 0) {
+                    playerTurnLabel.setText("Player Turn: X");
+                    playerTurnLabel.setForeground(Color.RED);
+                  } else {
+                    playerTurnLabel.setText("Player Turn: O");
+                    playerTurnLabel.setForeground(Color.BLUE);
+                  }
+                
+                counter2--;
+                // reset turn to next player here               
+                
+            }  else {
+                timer2.cancel();
+                 
+                timerLabel.setVisible(true);
+                jPanel12.setVisible(false);
+                jPanel11.setVisible(true);
+                jLabel4.setVisible(true);
+                jPanel1.setVisible(true);
+                winCounterLabel.setVisible(true);
+                jPanel17.setVisible(true);
+
+                timerCountdown();
+                
+             }
+                
+             if (playerTurnLabel.getText().equals("Player Turn: X")) {
+                 player1 = true;
+            } else {
+                 player1 = false;
+             }
+          }
+            
+        };
+
 public void timerCountdown() {   
     
     timer.scheduleAtFixedRate(task, 0, 1000);
@@ -871,9 +940,7 @@ public void setPlayerLabel() {
     
     
     
-    
-
-
+   
 // ^^^^^^^^^^^^^^^^^^^^^^
     // JFRAME COMPONENTS CODE
     
@@ -886,8 +953,10 @@ public void setPlayerLabel() {
     int moveCount = 0;
     static boolean gameOver = false;
     static boolean tie = false; 
-    static boolean player1 = true;
-            int counter = 15;
+    
+    
+        static boolean player1 = true;
+    int counter = 15;
     
     
     int playerOneWins = 0;
@@ -1069,6 +1138,8 @@ public void setPlayerLabel() {
          
          disableButtons();
          
+         timerLabel.setVisible(false);
+         
          // if the result is a win, we update labels with who won and disable unnecessary elements
        } else if (gameOver==true) {
          // playerNumber returns either 0 or 1 since we used getPlayerNumber() 
@@ -1099,6 +1170,7 @@ public void setPlayerLabel() {
          }
          
          disableButtons();
+         timerLabel.setVisible(false);
         }
     }
     
@@ -1203,6 +1275,8 @@ public void setPlayerLabel() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
