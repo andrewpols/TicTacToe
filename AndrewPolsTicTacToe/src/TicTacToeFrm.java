@@ -839,14 +839,11 @@ public class TicTacToeFrm extends javax.swing.JFrame {
         playerTurnLabel.setVisible(true);
         jButton1.setVisible(false);
         
-        timer2.scheduleAtFixedRate(task2, 0, 300);
+        
+        timer2.scheduleAtFixedRate(task2, 0, 250);
         
         
-        
-        if (counter2 == 0) {
-            
-        }
-             
+       
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -855,7 +852,9 @@ Timer timer = new Timer();
 
 Timer timer2 = new Timer();
 
-int counter2 = 10;
+
+double randomPlay = ( Math.random() * 5 ) + 8;
+int counter2 = (int) Math.round(randomPlay);
 
 
 TimerTask task = new TimerTask() {
@@ -910,12 +909,18 @@ TimerTask task = new TimerTask() {
                 timerCountdown();
                 
              }
-                
-             if (playerTurnLabel.getText().equals("Player Turn: X")) {
-                 player1 = true;
-            } else {
-                 player1 = false;
-             }
+               
+            if (counter2 == 0) {
+                if (Math.round(randomPlay) % 2 == 0) {
+                    playerTurnLabel.setText("Player Turn: X");
+                    playerTurnLabel.setForeground(Color.RED);
+                    player1 = true;
+                } else {
+                    playerTurnLabel.setText("Player Turn: O");
+                    playerTurnLabel.setForeground(Color.BLUE);
+                    player1 = false;
+                 }
+            }
           }
             
         };
